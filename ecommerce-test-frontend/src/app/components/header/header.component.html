@@ -1,5 +1,16 @@
 <header class="header">
-    <h1 class="logo">EcommStore</h1>
-    <button class="config-button">Configurações</button>
+    <h1 class="logo" (click)="goToHome()">EcommStore</h1>
+    
+    <div class="config-menu">
+      @if (showConfigButton) {
+        <button class="config-button" (click)="EnableConfigurations()">Configurações</button>
+      }
+  
+      @if (enableButtons) {
+        <button class="add-product-button" (click)="goToAddProduct()">
+          <i class="fas fa-plus"></i>
+        </button>
+      }
+    </div>
 </header>
   

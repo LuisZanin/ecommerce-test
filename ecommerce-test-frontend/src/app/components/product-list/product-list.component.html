@@ -1,16 +1,25 @@
 <div class="product-grid">
-    @for (product of products; track product.id) {
-        <div class="product-card" (click)="selectProduct(product)">
+    <!-- Loop para renderizar os produtos -->
+    @for (product of products; track product._id) {
+        <div class="product-card" (click)="goToProductDetails(product._id)">
             <div class="product-image">
                 <img [src]="product.imageUrl" alt="{{ product.name }}" class="imagem-redimensionada" />
             </div>
+            
+            @if (showDeleteAndEditButtons) {
+                <div class="action-buttons">
+                    <button class="edit-button" (click)="editProduct(product._id)">
+                        <i class="fas fa-pencil-alt"></i>
+                    </button>
+                    <button class="delete-button" (click)="deleteProduct(product._id)">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            }
+
             <h3 class="product-name">{{ product.name }}{{ product.name.length > 40 ? '...' : '' }}</h3>
             <p class="price">R${{ product.price }}</p>
             <p class="category">{{ product.productCategory }}</p>
         </div>
     }
 </div>
-
-@if (selectedProductId) {
-    <ec-product-details [selectedProductId]="selectedProductId"></ec-product-details>
-}

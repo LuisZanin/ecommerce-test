@@ -32,6 +32,15 @@ export class ProductsController {
     }
   }
 
+  @Get('category/:category')
+  async findByCategory(@Param('category') category: string): Promise<Product[]> {
+    try {
+      return this.productsService.findByCategory(category);
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+    }
+  }
+
   @Post(':id')
   @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
   async update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {

@@ -1,0 +1,88 @@
+<div class="product-form-container">
+  <h2>{{ productId ? 'Editar Produto' : 'Criar Produto' }}</h2>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Nome</label>
+      <input id="name" formControlName="name" type="text" />
+
+      @if (productForm.get('name')?.invalid && productForm.get('name')?.touched) {
+        <div>
+          @if (productForm.get('name')?.hasError('required')) {
+            <small>O nome é obrigatório.</small>
+          }
+          @if (productForm.get('name')?.hasError('minlength')) {
+            <small>O nome deve ter pelo menos 3 caracteres.</small>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="price">Preço</label>
+      <input id="price" formControlName="price" type="number" />
+
+      @if (productForm.get('price')?.invalid && productForm.get('price')?.touched) {
+        <div>
+          @if (productForm.get('price')?.hasError('required')) {
+            <small>O preço é obrigatório.</small>
+          }
+          @if (productForm.get('price')?.hasError('min')) {
+            <small>O preço deve ser maior que 0.</small>
+          }
+        </div>
+      }
+    </div>
+
+    <div class = "form-group">
+      <label id = "imageUrl">URL da Imagem</label>
+      <textarea id="imageUrl" formControlName="imageUrl"></textarea>
+      @if (productForm.get('imageUrl')?.invalid && productForm.get('imageUrl')?.touched) {
+        <div>
+          @if (productForm.get('imageUrl')?.hasError('required')) {
+            <small>A URL da imagem é obrigatória.</small>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="description">Descrição</label>
+      <textarea id="description" formControlName="description"></textarea>
+      @if (productForm.get('description')?.invalid && productForm.get('description')?.touched) {
+        <div>
+          @if (productForm.get('description')?.hasError('required')) {
+            <small>A descrição é obrigatória.</small>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="productCategory">Categoria</label>
+      <select id="productCategory" formControlName="productCategory">
+        <option value="">Selecione uma categoria</option>
+        @for (category of categories; track $index) {
+          <option value="{{ category }}">{{ category }}</option>
+        }
+      </select>
+
+      @if (productForm.get('productCategory')?.invalid && productForm.get('productCategory')?.touched) {
+        <div>
+          @if (productForm.get('productCategory')?.hasError('required')) {
+            <small>A categoria é obrigatória.</small>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="isEnable"> Está Ativo? </label>
+      <input id="isEnable" formControlName="isEnable" type="checkbox" />
+    </div>
+
+    <button type="submit" [disabled]="productForm.invalid">
+      {{ productId ? 'Atualizar Produto' : 'Criar Produto' }}
+    </button>
+  </form>
+</div>

@@ -1,6 +1,6 @@
 <nav class="nav-bar">
     @for (category of categories; track $index) {
-        <button class="nav-button">
+        <button class="nav-button"  (click)="filterProductsByCategory(category)">
             {{ category }}
         </button>
     }

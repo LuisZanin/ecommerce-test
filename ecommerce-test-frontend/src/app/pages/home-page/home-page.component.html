@@ -1,0 +1,6 @@
+<ec-header [showConfigButton]="true" (configButtonClicked)="showDeleteAndEditButtons = $event"></ec-header>
+<ec-nav-bar></ec-nav-bar>
+
+<div class="content">
+  <ec-product-list [showDeleteAndEditButtons]="showDeleteAndEditButtons"></ec-product-list>
+</div>

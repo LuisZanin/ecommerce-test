@@ -1,36 +1,57 @@
-import { Component } from '@angular/core';
-import { HttpClient, provideHttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ProductService } from '../../product/service/product.service';
 import { Product } from '../../model/product.model';
-import { ProductDetailsComponent } from '../product-details/product-details.component';
 
 @Component({
   selector: 'ec-product-list',
   standalone: true,
-  imports: [CommonModule, ProductDetailsComponent],
+  imports: [CommonModule],
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  styleUrls: ['./product-list.component.css'],
 })
-export class ProductListComponent {
-  url = 'http://localhost:3000/products';
-
+export class ProductListComponent implements OnInit {
+  
+  @Input() showDeleteAndEditButtons: boolean = false;
+  
   products: Product[] = [];
+  
+  constructor(
+    private productService: ProductService,
+    private router: Router
+  ) {}
+  
+  ngOnInit(): void {
+    this.productService.products$.subscribe((products) => {
+      this.products = products;
+    });
 
-  constructor(private http: HttpClient) {
-    this.getProducts().subscribe(products => {
+    this.loadProducts();
+  }
+
+  loadProducts(): void {
+    this.productService.getProducts().subscribe((products) => {
       this.products = products;
     });
   }
 
-  private getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.url);
+  goToProductDetails(productId: string): void {
+    this.router.navigate([`/product/details/${productId}`]);
   }
 
-  selectedProductId: string = "";
+  editProduct(productId: string): void {
+    this.router.navigate([`/product/edit/${productId}`]);
+  }
 
-  selectProduct(product: any) {
-    this.selectedProductId = product._id;
-    console.log("teste ", this.selectedProductId);
+  deleteProduct(productId: string): void {
+    if (confirm('Tem certeza que deseja deletar este produto?')) {
+      this.productService.deleteProduct(productId).subscribe(() => {
+        this.productService.getProducts().subscribe((products) => {
+          this.products = products;
+        });
+        this.router.navigate([`/`]);
+      });
+    }
   }
 }

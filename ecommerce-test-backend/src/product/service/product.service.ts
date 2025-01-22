@@ -30,6 +30,14 @@ export class ProductsService {
     return product;
   }
 
+  async findByCategory(category: string): Promise<Product[]> {
+    const products = await this.productModel.find({ productCategory: category }).exec();
+    if (!products || products.length === 0) {
+      throw new NotFoundException('Nenhum produto encontrado para esta categoria.');
+    }
+    return products;
+  }
+
   async update(id: string, updateProductDto: UpdateProductDto): Promise<Product> {
     const existingProduct = await this.productModel.findOne({ name: updateProductDto.name }).exec();
     if (existingProduct && existingProduct._id.toString() !== id) {

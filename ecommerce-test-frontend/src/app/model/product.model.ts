@@ -1,7 +1,7 @@
 import { ProductCategory } from "../product/enums/product.enum";
 
 export interface Product {
-    id?: string;
+    _id: string;
 
     name: string;
   

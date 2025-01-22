@@ -1,3 +1,7 @@
+.header .logo {
+  cursor: pointer;
+}
+
 .header {
   display: flex;
   align-items: center;
@@ -13,6 +17,12 @@
   font-weight: bold;
 }
 
+.config-menu {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaçamento entre os botões */
+}
+
 .config-button {
   background-color: rgba(255, 255, 255, 0.2);
   border: none;
@@ -26,4 +36,25 @@
 
 .config-button:hover {
   background-color: rgba(255, 255, 255, 0.4);
+}
+
+.add-product-button {
+  width: 40px;
+  height: 40px;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.add-product-button i {
+  font-size: 1.2rem;
+}
+
+.add-product-button:hover {
+  background-color: #218838;
 }
