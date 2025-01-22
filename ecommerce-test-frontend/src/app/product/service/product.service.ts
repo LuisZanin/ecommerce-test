@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Product } from '../../model/product.model';
-import { MatSnackBar } from '@angular/material/snack-bar';  // Importar o MatSnackBar
 
 @Injectable({
   providedIn: 'root',
@@ -13,21 +12,21 @@ export class ProductService {
   private productsSubject = new BehaviorSubject<Product[]>([]);
   products$ = this.productsSubject.asObservable();
 
-  constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
+  constructor(private http: HttpClient) {}
 
   createProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(this.apiUrl, product).pipe(
       catchError((error) => {
-        this.handleError(error); 
+        console.error('Erro ao criar o produto:', error);
         return throwError(() => new Error('Erro ao criar o produto'));
       })
     );
   }
 
   updateProduct(id: string, product: Product): Observable<Product> {
-    return this.http.post<Product>(`${this.apiUrl}/${id}`, product).pipe(
+    return this.http.put<Product>(`${this.apiUrl}/${id}`, product).pipe(
       catchError((error) => {
-        this.handleError(error);
+        console.error('Erro ao atualizar o produto:', error);
         return throwError(() => new Error('Erro ao atualizar o produto'));
       })
     );
@@ -36,7 +35,7 @@ export class ProductService {
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiUrl).pipe(
       catchError((error) => {
-        this.handleError(error);
+        console.error('Erro ao buscar os produtos:', error);
         return throwError(() => new Error('Erro ao buscar os produtos'));
       })
     );
@@ -49,7 +48,7 @@ export class ProductService {
   getProductsByCategory(category: string): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.apiUrl}/category/${category}`).pipe(
       catchError((error) => {
-        this.handleError(error);
+        console.error('Erro ao buscar os produtos por categoria:', error);
         return throwError(() => new Error('Erro ao buscar os produtos por categoria'));
       })
     );
@@ -58,7 +57,7 @@ export class ProductService {
   getProductById(id: string): Observable<Product> {
     return this.http.get<Product>(`${this.apiUrl}/${id}`).pipe(
       catchError((error) => {
-        this.handleError(error);
+        console.error('Erro ao buscar o produto:', error);
         return throwError(() => new Error('Erro ao buscar o produto'));
       })
     );
@@ -67,21 +66,9 @@ export class ProductService {
   deleteProduct(id: string): Observable<Product> {
     return this.http.delete<Product>(`${this.apiUrl}/${id}`).pipe(
       catchError((error) => {
-        this.handleError(error);
+        console.error('Erro ao excluir o produto:', error);
         return throwError(() => new Error('Erro ao excluir o produto'));
       })
     );
-  }
-
-  private handleError(error: any): void {
-    console.error('Erro:', error);
-
-    const errorMessage = error?.error?.message || error?.message || 'Algo deu errado. Tente novamente mais tarde.';
-
-    this.snackBar.open(errorMessage, 'Fechar', {
-      duration: 3000,
-      verticalPosition: 'top',
-      horizontalPosition: 'center',
-    });
   }
 }
