@@ -37,6 +37,11 @@ $ npm start
 ```bash
 $ node script.js
 ```
+- Para Rodar testes
+```bash
+$ npm test
+```
+
 
 ## FrontEnd
 
