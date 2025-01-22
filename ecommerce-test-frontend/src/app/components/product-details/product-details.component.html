@@ -1,0 +1,10 @@
+  @if (SelectedProduct) {
+      <div class="product-details" >
+        <h2>{{ SelectedProduct.name }}</h2>
+        <img [src]="SelectedProduct.imageUrl" alt="{{ SelectedProduct.name }}" class="product-image"/>
+        <p><strong>Categoria:</strong> {{ SelectedProduct.productCategory }}</p>
+        <p><strong>Preço:</strong> R$ {{ SelectedProduct.price }}</p>
+        <p><strong>Descrição:</strong> {{ SelectedProduct.description }}</p>
+      </div>
+  }
+  

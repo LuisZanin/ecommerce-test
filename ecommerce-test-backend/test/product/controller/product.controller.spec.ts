@@ -57,6 +57,7 @@ describe('ProductsController', () => {
       const product: Product = {
         _id: '1',
         name: 'Produto Teste',
+        imageUrl: 'http://localhost:3000/products/1',
         price: 100.00,
         productCategory: ProductCategory.MEMORIAS_RAM,
         description: 'Descrição do produto teste',
@@ -74,6 +75,7 @@ describe('ProductsController', () => {
       const product: Product = {
         _id: '1',
         name: 'Produto Teste',
+        imageUrl: 'http://localhost:3000/products/1',
         price: 100.00,
         productCategory: ProductCategory.MEMORIAS_RAM,
         description: 'Descrição do produto teste',
@@ -91,6 +93,7 @@ describe('ProductsController', () => {
       const product: Product = {
         _id: '1',
         name: 'Produto Teste',
+        imageUrl: 'http://localhost:3000/products/1',
         price: 100.00,
         productCategory: ProductCategory.MEMORIAS_RAM,
         description: 'Descrição do produto teste',

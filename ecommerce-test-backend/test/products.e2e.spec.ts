@@ -11,6 +11,7 @@ describe('Produtos e2e', () => {
     findAll: () => [
         { 
             name: 'Produto 1', 
+            imageUrl: 'http://localhost:3000/products/1',
             price: 100, 
             description: 'Descrição do produto 1', 
             isEnable: true

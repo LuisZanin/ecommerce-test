@@ -5,4 +5,4 @@ export enum ProductCategory {
     MEMORIAS_RAM = 'Memórias RAM',
     PERIFERICOS  = 'Periféricos',
     PROCESSADORES = 'Processadores',
-  }
+}

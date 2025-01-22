@@ -1,0 +1,16 @@
+<div class="product-grid">
+    @for (product of products; track product.id) {
+        <div class="product-card" (click)="selectProduct(product)">
+            <div class="product-image">
+                <img [src]="product.imageUrl" alt="{{ product.name }}" class="imagem-redimensionada" />
+            </div>
+            <h3 class="product-name">{{ product.name }}{{ product.name.length > 40 ? '...' : '' }}</h3>
+            <p class="price">R${{ product.price }}</p>
+            <p class="category">{{ product.productCategory }}</p>
+        </div>
+    }
+</div>
+
+@if (selectedProductId) {
+    <ec-product-details [selectedProductId]="selectedProductId"></ec-product-details>
+}
