@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ProductCategory } from '../../product/enums/product.enum';
 import { ProductService } from '../../product/service/product.service';
 
@@ -8,13 +8,23 @@ import { ProductService } from '../../product/service/product.service';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
-export class NavBarComponent {
+export class NavBarComponent implements OnInit {
   categories = Object.values(ProductCategory);
 
   constructor(
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      const category = params.get('category');
+      if (category) {
+        this.filterProductsByCategory(category);
+      }
+    });
+  }
 
   filterProductsByCategory(category: string): void {
     this.router.navigate([`/products/category/${category}`]);
@@ -25,8 +35,10 @@ export class NavBarComponent {
   }
 
   onReloadProducts(): void {
+    // Quando o usuário clicar para carregar todos os produtos
     this.router.navigate(['/']);
 
+    // Carrega todos os produtos
     this.productService.getProducts().subscribe((products) => {
       this.productService.setProducts(products);
     });

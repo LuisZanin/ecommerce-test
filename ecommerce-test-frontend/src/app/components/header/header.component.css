@@ -20,7 +20,7 @@
 .config-menu {
   display: flex;
   align-items: center;
-  gap: 10px; /* Espaçamento entre os botões */
+  gap: 10px;
 }
 
 .config-button {

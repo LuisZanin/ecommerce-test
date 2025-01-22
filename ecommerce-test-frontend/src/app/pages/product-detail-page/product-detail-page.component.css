@@ -102,7 +102,6 @@ ec-header {
   margin-top: 40px;
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
   .product-detail-container {
     flex-direction: column;

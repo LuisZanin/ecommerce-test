@@ -25,7 +25,7 @@ export class ProductService {
   }
 
   updateProduct(id: string, product: Product): Observable<Product> {
-    return this.http.put<Product>(`${this.apiUrl}/${id}`, product).pipe(
+    return this.http.post<Product>(`${this.apiUrl}/${id}`, product).pipe(
       catchError((error) => {
         this.handleError(error);
         return throwError(() => new Error('Erro ao atualizar o produto'));
