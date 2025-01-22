@@ -1,10 +1,11 @@
 # Ecommerce-test
 
 Um Novo projeto realizado com o Intuito de criação de uma simples e robusta API, assim como um simples visual Frontend.
+O tema do Projeto é uma loja de ecommerce voltada à informática.
 
 ## Tecnologias Utilizadas
 
-### Interface
+### FrontEnd
 - Angular 19
 
 ### API
